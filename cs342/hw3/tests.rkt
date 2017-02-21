@@ -113,7 +113,7 @@
 (define bcond1 '(lt 4 5))
 
 ;; True
-(define bcond2 '(eq (x 3) 3))
+(define bcond2 '(eq (var ((x 3)) x) 3))
 
 ;; False
 (define bcond3 '(gt 3 4 3))
