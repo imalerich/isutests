@@ -70,6 +70,12 @@
     (gt 3 2) 0 garbage
 ))
 
+;; '(Cannot Evaluate)
+;; Variable assignment expressions should not be empty.
+(define eval10 '(
+    var () 3
+))
+
 ;;;;;;;;;;;
 ;; CCond ;;
 ;;;;;;;;;;;
