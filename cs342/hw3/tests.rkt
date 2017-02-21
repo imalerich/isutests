@@ -192,27 +192,30 @@
 ;;;;;;;;;;;;;;;
 
 ;; True
-(define varassign0
+(define varassignseq0
   '((x 3) (y 2) (z 6))
 )
 
 ;; True
-(define varassign1
+(define varassignseq1
   '((x 3))
 )
 
-;; True
-(define varassign2
+;; False
+;; VarAssignSeq must have at least
+;; one (Variable Expr) within according
+;; to the specification.
+(define varassignseq2
   '()
 )
 
 ;; False
-(define varassign3
+(define varassignseq3
   '((x 3 2))
 )
 
 ;; False
-(define varassign4
+(define varassignseq4
   '((x 3) 4)
 )
 
