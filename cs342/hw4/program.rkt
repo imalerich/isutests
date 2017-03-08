@@ -1,6 +1,61 @@
 #lang racket
 (provide (all-defined-out))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Assignment Provided ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (synchk prov0) returns false (explanation for 1a)
+;; f is applied but there is not enclosing fun f
+(define prov0
+    '(fun ((f1 (x)) ((gt x 0)
+	(* x (apply (f ((- x 1)))))
+	1))
+    (apply (f1 (x))
+)))
+
+;; (synchk prov1) returns false (explanation for 1b)
+;; f1 is applied with incorrect number of actual arguments
+(define prov1
+    '(fun ((f1 (x)) ((gt x 0)
+	(* x (apply (f1 ((- x 1)))))
+	1))
+    (apply (f1 ())
+)))
+
+;; (eval prov2 ’((x 3))) returns 6
+;; (eval prov2 ’((x 4))) returns 24
+(define prov2
+    '(fun ((f1 (x)) ((gt x 0)
+	(* x (apply (f1 ((- x 1)))))
+	1))
+    (apply (f1 (x))
+)))
+
+;;;;;;;;;;;;;;
+;; Programs ;;
+;;;;;;;;;;;;;;
+
+;; Returns pi.
+;; Results in 4.14159265
+(define prog0
+    '(fun ((pi ()) 3.14159265) 
+	(apply (pi ())
+)))
+
+;; Adds one to pi.
+;; Results in 4.14159265
+(define prog1
+    '(fun ((pi ()) 3.14159265) 
+	(+ 1 (apply (pi ()))
+)))
+
+;; Tries to add one to pi.
+;; But pi is undefined, invalid.
+(define prog2
+    '(+ 1 (apply (pi ())))
+)
+
 ;;;;;;;;;;;;;;;;;;
 ;; FormalParams ;;
 ;;;;;;;;;;;;;;;;;;
