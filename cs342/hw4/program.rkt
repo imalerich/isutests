@@ -36,6 +36,7 @@
 ;; Programs ;;
 ;;;;;;;;;;;;;;
 
+;; VALID
 ;; Returns pi.
 ;; Results in 4.14159265
 (define prog0
@@ -43,6 +44,7 @@
 	(apply (pi ())
 )))
 
+;; VALID
 ;; Adds one to pi.
 ;; Results in 4.14159265
 (define prog1
@@ -50,12 +52,14 @@
 	(+ 1 (apply (pi ()))
 )))
 
+;; INVALID
 ;; Tries to add one to pi.
 ;; But pi is undefined, invalid.
 (define prog2
     '(+ 1 (apply (pi ())))
 )
 
+;; VALID
 ;; Adds two, then adds one to z,
 ;; where z must be provided by the input environment.
 ;; (eval prog3 '((z 2))) returns 5
@@ -67,6 +71,7 @@
 	    )
 )))))
 
+;; INVALID
 ;; Tries to call an undefined 'addthree' function
 (define prog4
     '(fun ((addone (x)) (+ x 1))
@@ -75,6 +80,65 @@
 		(apply (addthree (z)))
 	    )
 )))))
+
+;; VALID
+;; Program -> Expr -> Number
+(define prog5 525600)
+
+;; VALID
+;; Program -> Expr -> Variable
+(define prog6 'x)
+
+;; INVALID
+;; Similar to prog1, but swapped the ordering of the operands.
+(define prog7
+    '(+ (apply (pi ())) 1)
+)
+
+;; INVALID
+;; pi is not defined
+(define prog8
+    '((not (gt (apply (pi ())) 1))
+	1
+	0
+))
+
+;; VALID
+;; same as prog8, but pi is defined
+;; evaluates to 0, as !(pi > 1) evaluates to FALSE
+(define prog9
+    '(fun ((pi ()) 3.14159265) 
+	((not (gt (apply (pi ())) 1))
+	    1
+	    0
+)))
+
+;; INVALID
+;; Variable assignment expression uses undefined function.
+(define prog10
+    '(var
+	((x (apply (pi ()))))
+	(* 2 x)
+))
+
+;; INVALID
+;; Variable assignment expression is fine now,
+;; but proceeding expression is invalid.
+(define prog11
+    '(var
+	((x 2))
+	(* x (apply (pi ())))
+))
+
+;; VALID
+;; Calls function pi to assign pi to x,
+;; then returns 2 * PI = 6.2831853
+(define prog12
+    '(fun ((pi ()) 3.14159265) 
+	(var
+	    ((x (apply (pi ()))))
+	    (* 2 x)
+)))
 
 ;;;;;;;;;;;;;;;;;;
 ;; FormalParams ;;
