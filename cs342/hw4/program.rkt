@@ -56,6 +56,26 @@
     '(+ 1 (apply (pi ())))
 )
 
+;; Adds two, then adds one to z,
+;; where z must be provided by the input environment.
+;; (eval prog3 '((z 2))) returns 5
+(define prog3
+    '(fun ((addone (x)) (+ x 1))
+	(fun ((addtwo (y)) (+ y 2))
+	    (apply (addone (
+		(apply (addtwo (z)))
+	    )
+)))))
+
+;; Tries to call an undefined 'addthree' function
+(define prog4
+    '(fun ((addone (x)) (+ x 1))
+	(fun ((addtwo (y)) (+ y 2))
+	    (apply (addone (
+		(apply (addthree (z)))
+	    )
+)))))
+
 ;;;;;;;;;;;;;;;;;;
 ;; FormalParams ;;
 ;;;;;;;;;;;;;;;;;;
