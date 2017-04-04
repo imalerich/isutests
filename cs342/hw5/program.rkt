@@ -75,7 +75,9 @@
 ;; Adds the two input values to the heap by decrementing the first by one each iteration
 ;; and incrementing the second each iteration.
 ;; Example:
-;;	(eval test7 '() '((1 20) (2 13))) -> '(33 '((1 0) (2 33)))
+;;	(eval test7 '() '((1 1) (2 1)))		-> '(2 '((1 0) (2 2)))
+;;	(eval test7 '() '((1 2) (2 3)))		-> '(5 '((1 0) (2 5)))
+;;	(eval test7 '() '((1 10) (2 6)))	-> '(16 '((1 0) (2 16)))
 (define test7
     ;; add(* x, * y)
     ;; Recursively adds the value pointed to by x, to the value pointed to by y.
