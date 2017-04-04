@@ -88,6 +88,24 @@
 	(apply (add (1 2)))
 ))
 
+;; Adds two increments of x together.
+;; Note as x is initially 13, 
+;; after one increment it is 14
+;; and after the second it is 15
+;; thus the result is 14 + 15 = 29.
+;; Examples:
+;;	(eval test8 '() '()) -> OOM
+;;	(eval test8 '() '((1 free))) -> '(29 ((1 15)))
+(define test8
+    ;; Increments the value pointed to by x.
+    '(fun ((incp (x)) (wref x (+ (deref x) 1)))
+	(var ((x (ref 13)))
+	    ;; Add two increments of x together.
+	    (+ 
+	      (apply (incp (x)))
+	      (apply (incp (x)))
+))))
+
 ;;;;;;;;;;;;;;;;;;
 ;; HW5 Provided ;;
 ;;;;;;;;;;;;;;;;;;
