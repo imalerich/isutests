@@ -65,6 +65,9 @@
 ;; Note needs at least one free heap location.
 ;; Returns: '(128 ((addr 128))
 ;; If no heap is given: OOM Exception
+;; Examples:
+;;	(eval test6 '() '()) -> OOM
+;;	(eval test6 '() '((1 free))) -> (128 ((1 128)))
 (define test6
     '(var ((x (ref 12)))
 	(var ((y x))
