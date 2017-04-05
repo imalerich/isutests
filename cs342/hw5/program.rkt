@@ -75,6 +75,7 @@
 ;; Adds the two input values to the heap by decrementing the first by one each iteration
 ;; and incrementing the second each iteration.
 ;; Example:
+;;	(eval test7 '() '())			-> OOMA
 ;;	(eval test7 '() '((1 1) (2 1)))		-> '(2 '((1 0) (2 2)))
 ;;	(eval test7 '() '((1 2) (2 3)))		-> '(5 '((1 0) (2 5)))
 ;;	(eval test7 '() '((1 10) (2 6)))	-> '(16 '((1 0) (2 16)))
@@ -105,6 +106,20 @@
 	      (apply (incp (x)))
 	      (apply (incp (x)))
 ))))
+
+;; Simple test for to make sure you can catch exceptions within operations.
+;; Example:
+;;	(eval test9 '() '()) -> OOMA
+(define test9
+    '(+ (deref 1) (deref 2))
+)
+
+;; Simple test for to make sure you can catch exceptions within conditionals
+;; Example:
+;;	(eval test10 '() '()) -> OOMA
+(define test10
+    '((< (deref 1) (deref 2)) 1 0)
+)
 
 ;;;;;;;;;;;;;;;;;;
 ;; HW5 Provided ;;
