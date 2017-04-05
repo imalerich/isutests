@@ -118,7 +118,7 @@
 ;; Example:
 ;;	(eval test10 '() '()) -> OOMA
 (define test10
-    '((< (deref 1) (deref 2)) 1 0)
+    '((lt (deref 1) (deref 2)) 1 0)
 )
 
 ;;;;;;;;;;;;;;;;;;
