@@ -110,6 +110,9 @@
 ;; Simple test for to make sure you can catch exceptions within operations.
 ;; Example:
 ;;	(eval test9 '() '()) -> OOMA
+;;	(eval test9 '() '((1 2))) -> OOMA
+;;	(eval test9 '() '((2 1))) -> OOMA
+;;	(eval test9 '() '((1 2) (2 3))) -> '(5 ((1 2) (2 3)))
 (define test9
     '(+ (deref 1) (deref 2))
 )
@@ -117,8 +120,11 @@
 ;; Simple test for to make sure you can catch exceptions within conditionals
 ;; Example:
 ;;	(eval test10 '() '()) -> OOMA
+;;	(eval test10 '() '((1 2))) -> OOMA
+;;	(eval test10 '() '((2 1))) -> OOMA
+;;	(eval test10 '() '((1 1) (2 2))) -> '(0 ((1 1) (2 2)))
 (define test10
-    '((lt (deref 1) (deref 2)) 1 0)
+    '((gt (deref 1) (deref 2)) 1 0)
 )
 
 ;;;;;;;;;;;;;;;;;;
